@@ -1,0 +1,47 @@
+
+// SPDX-License-Identifier: GPL-2.0-only
+/ {
+    tegra-camera-platform {
+        compatible = "nvidia,tegra194-camera-platform";
+        modules {
+            module0 {
+                badge = "imx586";
+                position = "rear";
+                drivertype = "imx586";
+                ports {
+                    #address-cells = <1>;
+                    #size-cells = <0>;
+                    port@0 {
+                        reg = <0>;
+                        imx586_out0: endpoint {
+                            port-index = <0>;
+                            bus-width  = <4>;
+                            remote-endpoint = <&imx586_csi_in0>;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    i2c@0 {
+        imx586@1a {
+            compatible = "sony,imx586";
+            reg = <0x1a>;
+            clocks = <&tegra_car TEGRA210_CLK_EXTPERIPH1>;
+            clock-frequency = <37125000>;
+            status = "okay";
+            ports {
+                #address-cells = <1>;
+                #size-cells = <0>;
+                port@0 {
+                    reg = <0>;
+                    imx586_csi_in0:endpoint {
+                        port-index = <0>;
+                        bus-width  = <4>;
+                        remote-endpoint = <&imx586_out0>;
+                    };
+                };
+            };
+        };
+    };
+};

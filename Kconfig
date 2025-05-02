@@ -1,0 +1,7 @@
+config VIDEO_IMX586
+	tristate "Sony IMX586 CMOS sensor (Jetson)"
+	depends on I2C && VIDEO_V4L2 && MEDIA_CAMERA_SUPPORT
+	select VIDEO_V4L2_SUBDEV_API
+	select REGMAP_I2C
+	help
+	  V4L2 sensor driver for the Sony IMX586 on NVIDIA Jetson platforms.
